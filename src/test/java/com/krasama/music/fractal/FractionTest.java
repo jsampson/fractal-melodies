@@ -1,3 +1,5 @@
+package com.krasama.music.fractal;
+
 import junit.framework.TestCase;
 
 public class FractionTest extends TestCase

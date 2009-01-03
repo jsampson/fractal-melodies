@@ -1,3 +1,5 @@
+package com.krasama.music.fractal;
+
 import java.math.BigInteger;
 
 public class Fraction
