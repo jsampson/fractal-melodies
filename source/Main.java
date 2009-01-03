@@ -1,3 +1,5 @@
+package music;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.sound.midi.MidiChannel;
@@ -17,9 +19,9 @@ public class Main
 //        Note[] pattern = { new Note(-2, Fraction.valueOf("1/2")), new Note(3, Fraction.valueOf("1/2")) };
 //        Note start = new Note(0, Fraction.valueOf("16"));
 //        Fraction bottom = Fraction.valueOf("1/16");
-        Note[] pattern = { new Note(-1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")) };
-        Note start = new Note(0, Fraction.valueOf("64"));
-        Fraction bottom = Fraction.valueOf("1/16");
+//        Note[] pattern = { new Note(-1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")) };
+//        Note start = new Note(0, Fraction.valueOf("64"));
+//        Fraction bottom = Fraction.valueOf("1/16");
 //        Note[] pattern = { new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/2")) };
 //        Note start = new Note(0, Fraction.valueOf("32"));
 //        Fraction bottom = Fraction.valueOf("1/16");
@@ -34,6 +36,12 @@ public class Main
 //        Fraction bottom = Fraction.valueOf("1/16");
 //        Note start = new Note(0, Fraction.valueOf("1"));
 //        Fraction bottom = Fraction.valueOf("1/4");
+//        Note[] pattern = { new Note(2, Fraction.valueOf("1/6")), new Note(1, Fraction.valueOf("1/6")), new Note(0, Fraction.valueOf("1/6")), new Note(3, Fraction.valueOf("1/6")), new Note(3, Fraction.valueOf("1/6")), new Note(4, Fraction.valueOf("1/6")) };
+//        Note start = new Note(0, Fraction.valueOf("12"));
+//        Fraction bottom = Fraction.valueOf("1/18");
+        Note[] pattern = { new Note(-2, Fraction.valueOf("1/5")), new Note(0, Fraction.valueOf("1/5")), new Note(0, Fraction.valueOf("1/5")), new Note(-2, Fraction.valueOf("1/5")), new Note(-3, Fraction.valueOf("1/5")) };
+        Note start = new Note(0, Fraction.valueOf("10"));
+        Fraction bottom = Fraction.valueOf("2/25");
         List<Note> result = new ArrayList<Note>();
         start.iterate(result, pattern, bottom);
         play(result);
