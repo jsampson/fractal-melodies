@@ -14,12 +14,12 @@ public class Main
 //        Note[] pattern = { new Note(-2, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/2")) };
 //        Note start = new Note(0, Fraction.valueOf("4"));
 //        Fraction bottom = Fraction.valueOf("1/8");
-        Note[] pattern = { new Note(-2, Fraction.valueOf("1/2")), new Note(3, Fraction.valueOf("1/2")) };
-        Note start = new Note(0, Fraction.valueOf("16"));
-        Fraction bottom = Fraction.valueOf("1/16");
-//        Note[] pattern = { new Note(-1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")) };
-//        Note start = new Note(0, Fraction.valueOf("64"));
+//        Note[] pattern = { new Note(-2, Fraction.valueOf("1/2")), new Note(3, Fraction.valueOf("1/2")) };
+//        Note start = new Note(0, Fraction.valueOf("16"));
 //        Fraction bottom = Fraction.valueOf("1/16");
+        Note[] pattern = { new Note(-1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")) };
+        Note start = new Note(0, Fraction.valueOf("64"));
+        Fraction bottom = Fraction.valueOf("1/16");
 //        Note[] pattern = { new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/2")) };
 //        Note start = new Note(0, Fraction.valueOf("32"));
 //        Fraction bottom = Fraction.valueOf("1/16");
@@ -46,6 +46,7 @@ public class Main
         try
         {
             MidiChannel chan = synth.getChannels()[0];
+            Thread.sleep(1000L);
             long start = System.currentTimeMillis();
             long target = start;
             for (int i = 0; i < notes.size(); i++)
@@ -55,7 +56,7 @@ public class Main
                 long noteTime = note.getTime();
                 if (i == notes.size() - 1)
                 {
-                    noteTime *= 4;
+                    noteTime += 1000L;
                 }
                 target += noteTime;
                 long sleepTime = target - System.currentTimeMillis();
