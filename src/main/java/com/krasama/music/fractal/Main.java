@@ -13,9 +13,9 @@ public class Main
 //        Note[] pattern = { new Note(-1, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/2")), new Note(1, Fraction.valueOf("1/4")) };
 //        Note start = new Note(0, Fraction.valueOf("4"));
 //        Fraction bottom = Fraction.valueOf("1/8");
-//        Note[] pattern = { new Note(-2, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/2")) };
-//        Note start = new Note(0, Fraction.valueOf("4"));
-//        Fraction bottom = Fraction.valueOf("1/8");
+        Note[] pattern = { new Note(-2, Fraction.valueOf("1/4")), new Note(0, Fraction.valueOf("1/4")), new Note(1, Fraction.valueOf("1/2")) };
+        Note start = new Note(0, Fraction.valueOf("4"));
+        Fraction bottom = Fraction.valueOf("1/8");
 //        Note[] pattern = { new Note(-2, Fraction.valueOf("1/2")), new Note(3, Fraction.valueOf("1/2")) };
 //        Note start = new Note(0, Fraction.valueOf("16"));
 //        Fraction bottom = Fraction.valueOf("1/16");
@@ -39,12 +39,13 @@ public class Main
 //        Note[] pattern = { new Note(2, Fraction.valueOf("1/6")), new Note(1, Fraction.valueOf("1/6")), new Note(0, Fraction.valueOf("1/6")), new Note(3, Fraction.valueOf("1/6")), new Note(3, Fraction.valueOf("1/6")), new Note(4, Fraction.valueOf("1/6")) };
 //        Note start = new Note(0, Fraction.valueOf("12"));
 //        Fraction bottom = Fraction.valueOf("1/18");
-        Note[] pattern = { new Note(-2, Fraction.valueOf("1/5")), new Note(0, Fraction.valueOf("1/5")), new Note(0, Fraction.valueOf("1/5")), new Note(-2, Fraction.valueOf("1/5")), new Note(-3, Fraction.valueOf("1/5")) };
-        Note start = new Note(0, Fraction.valueOf("10"));
-        Fraction bottom = Fraction.valueOf("2/25");
+//        Note[] pattern = { new Note(-2, Fraction.valueOf("1/5")), new Note(0, Fraction.valueOf("1/5")), new Note(0, Fraction.valueOf("1/5")), new Note(-2, Fraction.valueOf("1/5")), new Note(-3, Fraction.valueOf("1/5")) };
+//        Note start = new Note(0, Fraction.valueOf("10"));
+//        Fraction bottom = Fraction.valueOf("2/25");
         List<Note> result = new ArrayList<Note>();
         start.iterate(result, pattern, bottom);
         play(result);
+        System.exit(0);
     }
 
     private static void play(List<Note> notes) throws Exception

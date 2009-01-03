@@ -4,10 +4,6 @@ import java.util.List;
 
 public class Note
 {
-    public static final int[] MAJOR_SCALE = { 0, 2, 4, 5, 7, 9, 11 };
-
-    public static final int MIDDLE_C = 60;
-
     public static final Fraction WHOLE_NOTE = Fraction.valueOf(2000);
 
     final int pitch;
@@ -22,19 +18,7 @@ public class Note
 
     public int getNumber()
     {
-        int p = pitch;
-        int n = MIDDLE_C;
-        while (p < 0)
-        {
-            p += 7;
-            n -= 12;
-        }
-        while (p > 6)
-        {
-            p -= 7;
-            n += 12;
-        }
-        return n + MAJOR_SCALE[p];
+        return Scale.C_MAJOR.get(pitch);
     }
 
     public long getTime()

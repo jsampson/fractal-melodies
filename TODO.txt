@@ -1,0 +1,25 @@
+/ exit after playing
+- progress bar while playing
+- string format for songs
+- pull all magic numbers into song variables (scale, tempo, etc.)
+- Swing UI
+- harmonies
+- reversing pattern
+- play pattern once right before song
+- generate MIDI sequence and play that, rather than calling noteOn/noteOff directly
+- output/save as .mid
+
+
+scale C_MAJOR
+    middle 60
+    steps 2, 4, 5, 7, 9, 11, 12
+
+song FIRST
+    notes -2 1/4, 0 1/4, 1 1/2
+    start 0 4
+    bottom 1/8
+    scale C_MAJOR
+    tempo 120 1/4
+
+default scale C_MAJOR
+default tempo 120 1/4
