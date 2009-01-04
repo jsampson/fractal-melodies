@@ -1,25 +1,33 @@
 / exit after playing
-- progress bar while playing
-- string format for songs
-- pull all magic numbers into song variables (scale, tempo, etc.)
-- Swing UI
-- harmonies
-- reversing pattern
-- play pattern once right before song
+/ reversing pattern
 - generate MIDI sequence and play that, rather than calling noteOn/noteOff directly
+- play pattern once right before song
+- pull all magic numbers into song variables (scale, tempo, etc.)
+    - pattern (lengths, pitch offsets, reversals)
+    - start
+    - bottom
+    - scale
+    - tempo
+- text format for songs
+- harmonies
+- progress bar while playing
+- Swing UI
 - output/save as .mid
+- figure out why songs end "abruptly" (subjectively/musically speaking)
 
 
-scale C_MAJOR
+# hash for comments
+scale C Major
     middle 60
     steps 2, 4, 5, 7, 9, 11, 12
 
-song FIRST
+default
+    scale C Major
+    tempo 120 1/4
+
+song First Song
     notes -2 1/4, 0 1/4, 1 1/2
     start 0 4
     bottom 1/8
-    scale C_MAJOR
+    scale C Major
     tempo 120 1/4
-
-default scale C_MAJOR
-default tempo 120 1/4

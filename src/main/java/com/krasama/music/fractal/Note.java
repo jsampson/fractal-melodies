@@ -10,10 +10,18 @@ public class Note
 
     final Fraction length;
 
+    final boolean reverse;
+
     public Note(int pitch, Fraction length)
+    {
+        this(pitch, length, false);
+    }
+
+    public Note(int pitch, Fraction length, boolean reverse)
     {
         this.pitch = pitch;
         this.length = length;
+        this.reverse = reverse;
     }
 
     public int getNumber()
@@ -28,6 +36,16 @@ public class Note
 
     public void iterate(List<Note> result, Note[] pattern, Fraction bottom)
     {
+        Note[] reversed = new Note[pattern.length];
+        for (int i = 0; i < pattern.length; i++)
+        {
+            reversed[pattern.length - i - 1] = pattern[i];
+        }
+        iterate(result, pattern, reversed, bottom);
+    }
+
+    private void iterate(List<Note> result, Note[] pattern, Note[] reversed, Fraction bottom)
+    {
         for (Note note : pattern)
         {
             if (note.length.mul(this.length).compareTo(bottom) < 0)
@@ -36,10 +54,10 @@ public class Note
                 return;
             }
         }
-        for (Note note : pattern)
+        for (Note note : (reverse ? reversed : pattern))
         {
-            Note scaled = new Note(this.pitch + note.pitch, this.length.mul(note.length));
-            scaled.iterate(result, pattern, bottom);
+            Note scaled = new Note(this.pitch + note.pitch, this.length.mul(note.length), this.reverse ^ note.reverse);
+            scaled.iterate(result, pattern, reversed, bottom);
         }
     }
 }
