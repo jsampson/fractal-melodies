@@ -51,4 +51,30 @@ public class Scale
         }
         return result;
     }
+
+    public boolean equals(Object other)
+    {
+        return other instanceof Scale && equals((Scale) other);
+    }
+
+    public boolean equals(Scale other)
+    {
+        if (this.middle != other.middle || this.steps.length != other.steps.length)
+        {
+            return false;
+        }
+        for (int i = 0; i < steps.length; i++)
+        {
+            if (this.steps[i] != other.steps[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int hashCode()
+    {
+        throw new UnsupportedOperationException();
+    }
 }

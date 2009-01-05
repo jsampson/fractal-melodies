@@ -1,6 +1,8 @@
 package com.krasama.music.fractal;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Note
 {
@@ -56,6 +58,43 @@ public class Note
         {
             Note scaled = new Note(this.pitch + note.pitch, this.length.mul(note.length), this.reverse ^ note.reverse);
             scaled.iterate(result, pattern, reversed, bottom);
+        }
+    }
+
+    public boolean equals(Object other)
+    {
+        return other instanceof Note && equals((Note) other);
+    }
+
+    public boolean equals(Note other)
+    {
+        return this.pitch == other.pitch && this.length.equals(other.length) && this.reverse == other.reverse;
+    }
+
+    public int hashCode()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public String toString()
+    {
+        return pitch + " " + (reverse ? "-" : "") + length;
+    }
+
+    public static Note valueOf(String string)
+    {
+        Pattern pattern = Pattern.compile("([-+]?[0-9]+) (-?)([0-9]+(/[0-9]+)?)");
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.matches())
+        {
+            int pitch = Integer.parseInt(matcher.group(1));
+            Fraction length = Fraction.valueOf(matcher.group(3));
+            boolean reverse = matcher.group(2).equals("-");
+            return new Note(pitch, length, reverse);
+        }
+        else
+        {
+            throw new IllegalArgumentException("invalid note: " + string);
         }
     }
 }

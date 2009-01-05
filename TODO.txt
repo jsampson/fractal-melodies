@@ -8,28 +8,15 @@
     / bottom
     / scale
     / tempo
-- text format for songs
-    - validation of everything
+/ text format for songs
 - harmonies
     - do we need multiple MIDI channels? trick is that note on/off events name the
       "key" that was pressed, so we either need multiple channels or some code to
       merge them together such that if bass and treble both want to press the same
       key they don't conflict
-- progress bar while playing
-- make MIDI tick resolution exact
-- Swing UI
 - output/save as .mid
+- command line to play or save named song
+- progress bar while playing
+- validate everything
 - figure out why songs end "abruptly" (subjectively/musically speaking)
-
-
-// for comments
-scale C Major
-    middle: 60
-    steps: 2, 4, 5, 7, 9, 11, 12
-
-song First Song
-    scale: C Major
-    notes: -2 1/4, 0 1/4, 1 -1/2
-    start: 0 32
-    bottom: 1/8
-    beats: 4
+- make MIDI tick resolution exact
