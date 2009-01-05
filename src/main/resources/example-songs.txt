@@ -20,84 +20,98 @@ song Test Song 2
     bottom: 1/9
     beats: 3
 
-song A
+song A // :)
     scale: C Major
     notes: -1 1/4, 0 1/2, 1 1/4
     start: 0 4
     bottom: 1/8
     beats: 4
 
-song B
+song B // :)
     scale: C Major
     beats: 4
     notes: -2 1/4, 0 1/4, 1 1/2
     start: 0 4
     bottom: 1/8
 
-song C // *****
+song C // ***
     scale: C Major
     beats: 4
     notes: -2 1/4, 0 1/4, 1 -1/2
     start: 0 128
     bottom: 1/16
 
-song D
+song D // ***
     scale: C Major
     beats: 4
     notes: -2 1/2, 3 1/2
     start: 0 16
     bottom: 1/16
 
-song E
+song D' // *
+    scale: A Minor
+    beats: 4
+    notes: -2 1/2, 3 1/2
+    start: 0 16
+    bottom: 1/16
+
+song D'' // *
+    scale: C Major
+    beats: 4
+    notes: -2 1/2, 3 -1/2
+    start: 0 16
+    bottom: 1/16
+
+song E // **
     scale: C Major
     beats: 4
     notes: -1 1/4, 0 1/4, 1 1/4, 0 1/4
     start: 0 64
     bottom: 1/16
 
-song F
+song F // **
     scale: C Major
     beats: 4
     notes: 0 1/4, 1 1/4, 0 1/2
     start: 0 32
     bottom: 1/16
 
-song G
+song G // ***
     scale: C Major
     beats: 4
     notes: 0 1/4, 1 1/4, -1 1/4, 0 1/4
     start: 0 64
     bottom: 1/16
 
-song H
+song H // **
     scale: C Major
     beats: 4
     notes: 0 1/8, -1 1/8, 0 3/4
     start: 0 32
     bottom: 1/16
 
-song I // *****
+song I // ***
     scale: C Major
     beats: 4
     notes: 0 1/8, -3 1/8, 0 3/4
     start: 0 32
     bottom: 1/16
 
-song J
+song J // *
     scale: C Major
     beats: 4
     notes: 0 1/8, -3 1/8, 0 3/4
     start: 0 1
     bottom: 1/4
 
-song K // ****
+song K // **
     scale: C Major
     beats: 6
     notes: 2 1/6, 1 1/6, 0 1/6, 3 1/6, 3 1/6, 4 1/6
     start: 0 12
     bottom: 1/18
 
-song L // ****
+song L // **
     scale: C Major
     beats: 5
     notes: -2 1/5, 0 1/5, 0 1/5, -2 1/5, -3 1/5

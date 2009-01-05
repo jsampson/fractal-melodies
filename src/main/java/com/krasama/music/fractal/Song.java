@@ -36,28 +36,29 @@ public class Song
         Sequence sequence = new Sequence(Sequence.PPQ, (int) TICKS_PER_BEAT);
         Track track = sequence.createTrack();
 
-        long patternTime = addNotesToTrack(track, Arrays.<Note> asList(pattern), 0L, false);
-        addNotesToTrack(track, result, patternTime + 2 * TICKS_PER_BEAT, true);
+        Fraction twoBeats = Fraction.TWO.mul(Fraction.valueOf(TICKS_PER_BEAT));
+        Fraction patternTime = addNotesToTrack(track, Arrays.<Note> asList(pattern), Fraction.ZERO, null);
+        addNotesToTrack(track, result, patternTime.add(twoBeats), twoBeats);
 
         return sequence;
     }
 
-    private long addNotesToTrack(Track track, List<Note> notes, long startTime, boolean extendLastNote) throws Exception
+    private Fraction addNotesToTrack(Track track, List<Note> notes, Fraction startTime, Fraction extendLastNote) throws Exception
     {
         Fraction ticksPerMeasure = beats.mul(Fraction.valueOf(TICKS_PER_BEAT));
-        long time = startTime;
+        Fraction time = startTime;
         for (int i = 0; i < notes.size(); i++)
         {
             Note note = notes.get(i);
             int noteNumber = note.getNoteNumber(scale);
-            long noteTime = note.getTicks(ticksPerMeasure);
-            if (extendLastNote && i == notes.size() - 1)
+            Fraction noteTime = note.length.mul(ticksPerMeasure);
+            if (extendLastNote != null && i == notes.size() - 1)
             {
-                noteTime += 2 * TICKS_PER_BEAT;
+                noteTime = noteTime.add(extendLastNote);
             }
-            track.add(noteOn(noteNumber, time));
-            track.add(noteOff(noteNumber, time + noteTime));
-            time += noteTime;
+            track.add(noteOn(noteNumber, time.round()));
+            time = time.add(noteTime);
+            track.add(noteOff(noteNumber, time.round()));
         }
         return time;
     }

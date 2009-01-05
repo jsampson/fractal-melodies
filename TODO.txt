@@ -19,4 +19,4 @@
 - progress bar while playing
 - validate everything
 - figure out why songs end "abruptly" (subjectively/musically speaking)
-- make MIDI tick resolution exact
+x make MIDI tick resolution exact

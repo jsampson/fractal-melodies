@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.Map;
 
-import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaEventListener;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 
@@ -18,12 +16,12 @@ public class Main
     {
         InputStream file = Main.class.getResourceAsStream("/example-songs.txt");
         Map<String, Song> songs = Parser.parseSongs(file);
-        Song song = songs.get("c");
+        Song song = songs.get("h");
         Sequence sequence = song.sequence();
         playSequence(sequence);
     }
 
-    public static void playSequence(Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException
+    public static void playSequence(Sequence sequence) throws Exception
     {
         final Sequencer sequencer = MidiSystem.getSequencer();
         sequencer.setSequence(sequence);
