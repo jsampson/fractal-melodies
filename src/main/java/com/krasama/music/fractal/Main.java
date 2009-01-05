@@ -16,7 +16,7 @@ public class Main
     {
         InputStream file = Main.class.getResourceAsStream("/example-songs.txt");
         Map<String, Song> songs = Parser.parseSongs(file);
-        Song song = songs.get("h");
+        Song song = songs.get("d+");
         Sequence sequence = song.sequence();
         playSequence(sequence);
     }

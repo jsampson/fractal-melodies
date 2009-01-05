@@ -95,6 +95,7 @@ public class Parser
             String startValue = values.get("start");
             String bottomValue = values.get("bottom");
             String beatsValue = values.get("beats");
+            String harmonyValue = values.get("harmony");
             if (!scales.containsKey(scaleValue))
             {
                 throw new IllegalArgumentException("unrecognized scale: " + scaleValue);
@@ -109,7 +110,8 @@ public class Parser
             Note start = Note.valueOf(startValue);
             Fraction bottom = Fraction.valueOf(bottomValue);
             Fraction beats = Fraction.valueOf(beatsValue);
-            songs.put(name, new Song(scale, notes, start, bottom, beats));
+            Note harmony = harmonyValue == null ? null : Note.valueOf(harmonyValue);
+            songs.put(name, new Song(scale, notes, start, bottom, beats, harmony));
         }
         else
         {

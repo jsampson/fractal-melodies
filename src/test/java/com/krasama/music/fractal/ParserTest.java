@@ -35,6 +35,8 @@ public class ParserTest extends TestCase
         assertEquals(new Note(0, Fraction.valueOf(32)), firstSong.start);
         assertEquals(Fraction.valueOf("1/8"), firstSong.bottom);
         assertEquals(Fraction.valueOf(4), firstSong.beats);
+        assertNull(firstSong.harmonyStart);
+        assertNull(firstSong.harmonyBottom);
         Song secondSong = songs.get("second song");
         assertEquals(new Scale(57, 2, 3, 5, 7, 8, 10, 12), secondSong.scale);
         assertEquals(new Note[] { new Note(-2, Fraction.valueOf("1/3")), new Note(1, Fraction.valueOf("1/3"), true),
@@ -42,6 +44,8 @@ public class ParserTest extends TestCase
         assertEquals(new Note(0, Fraction.valueOf(9)), secondSong.start);
         assertEquals(Fraction.valueOf("1/9"), secondSong.bottom);
         assertEquals(Fraction.valueOf(3), secondSong.beats);
+        assertEquals(new Note(-7, Fraction.valueOf(9)), secondSong.harmonyStart);
+        assertEquals(Fraction.valueOf("1/3"), secondSong.harmonyBottom);
     }
 
     private void assertEquals(Note[] expected, Note[] actual)

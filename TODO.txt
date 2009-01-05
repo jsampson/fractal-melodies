@@ -9,14 +9,15 @@
     / scale
     / tempo
 / text format for songs
-- harmonies
-    - do we need multiple MIDI channels? trick is that note on/off events name the
-      "key" that was pressed, so we either need multiple channels or some code to
-      merge them together such that if bass and treble both want to press the same
-      key they don't conflict
-- output/save as .mid
-- command line to play or save named song
+/ harmonies
+- command line
+    - play named song
+    - save named song as .mid
 - progress bar while playing
 - validate everything
 - figure out why songs end "abruptly" (subjectively/musically speaking)
+- do we need multiple MIDI channels? trick is that note on/off events name the
+  "key" that was pressed, so we either need multiple channels or some code to
+  merge them together such that if bass and treble both want to press the same
+  key they don't conflict
 x make MIDI tick resolution exact

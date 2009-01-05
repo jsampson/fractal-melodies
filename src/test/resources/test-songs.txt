@@ -22,4 +22,5 @@ SONG Second Song
     start: 0 9
     bottom: 1/9
     beats: 3
+    harmony: -7 1/3
     

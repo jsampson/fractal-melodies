@@ -18,27 +18,46 @@ public class Song
     final Note start;
     final Fraction bottom;
     final Fraction beats;
+    final Note harmonyStart;
+    final Fraction harmonyBottom;
 
-    public Song(Scale scale, Note[] pattern, Note start, Fraction bottom, Fraction beats)
+    public Song(Scale scale, Note[] pattern, Note start, Fraction bottom, Fraction beats, Note harmony)
     {
         this.scale = scale;
         this.pattern = pattern;
         this.start = start;
         this.bottom = bottom;
         this.beats = beats;
+        if (harmony != null)
+        {
+            this.harmonyStart = new Note(harmony.pitch, start.length);
+            this.harmonyBottom = harmony.length;
+        }
+        else
+        {
+            this.harmonyStart = null;
+            this.harmonyBottom = null;
+        }
     }
 
     public Sequence sequence() throws Exception
     {
-        List<Note> result = new ArrayList<Note>();
-        start.iterate(result, pattern, bottom);
-
         Sequence sequence = new Sequence(Sequence.PPQ, (int) TICKS_PER_BEAT);
         Track track = sequence.createTrack();
-
         Fraction twoBeats = Fraction.TWO.mul(Fraction.valueOf(TICKS_PER_BEAT));
+
         Fraction patternTime = addNotesToTrack(track, Arrays.<Note> asList(pattern), Fraction.ZERO, null);
+
+        List<Note> result = new ArrayList<Note>();
+        start.iterate(result, pattern, bottom);
         addNotesToTrack(track, result, patternTime.add(twoBeats), twoBeats);
+
+        if (harmonyStart != null)
+        {
+            List<Note> harmony = new ArrayList<Note>();
+            harmonyStart.iterate(harmony, pattern, harmonyBottom);
+            addNotesToTrack(track, harmony, patternTime.add(twoBeats), twoBeats);
+        }
 
         return sequence;
     }
