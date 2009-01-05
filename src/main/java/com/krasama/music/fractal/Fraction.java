@@ -10,7 +10,9 @@ public class Fraction
 
     public static final Fraction TWO = Fraction.valueOf(2);
 
-    public static Fraction valueOf(int i)
+    public static final Fraction HALF = ONE.div(TWO);
+
+    public static Fraction valueOf(long i)
     {
         return new Fraction(BigInteger.valueOf(i), BigInteger.ONE);
     }
@@ -45,7 +47,8 @@ public class Fraction
         this.den = den.divide(gcd);
     }
 
-    @Override public boolean equals(Object other)
+    @Override
+    public boolean equals(Object other)
     {
         return other instanceof Fraction ? equals((Fraction) other) : false;
     }
@@ -55,12 +58,14 @@ public class Fraction
         return compareTo(other) == 0;
     }
 
-    @Override public int hashCode()
+    @Override
+    public int hashCode()
     {
         throw new UnsupportedOperationException();
     }
 
-    @Override public String toString()
+    @Override
+    public String toString()
     {
         if (den.equals(BigInteger.ONE))
         {
@@ -97,7 +102,12 @@ public class Fraction
         return new Fraction(this.num.multiply(other.den).subtract(other.num.multiply(this.den)), this.den.multiply(other.den));
     }
 
-    public long longValue()
+    public long round()
+    {
+        return this.add(HALF).floor();
+    }
+
+    public long floor()
     {
         return num.divide(den).longValue();
     }

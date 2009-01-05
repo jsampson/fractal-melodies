@@ -4,8 +4,6 @@ import java.util.List;
 
 public class Note
 {
-    public static final Fraction WHOLE_NOTE = Fraction.valueOf(2000);
-
     final int pitch;
 
     final Fraction length;
@@ -24,14 +22,14 @@ public class Note
         this.reverse = reverse;
     }
 
-    public int getNumber()
+    public int getNoteNumber(Scale scale)
     {
-        return Scale.C_MAJOR.get(pitch);
+        return scale.get(pitch);
     }
 
-    public long getTime()
+    public long getTicks(Fraction ticksPerMeasure)
     {
-        return length.mul(WHOLE_NOTE).longValue();
+        return length.mul(ticksPerMeasure).round();
     }
 
     public void iterate(List<Note> result, Note[] pattern, Fraction bottom)

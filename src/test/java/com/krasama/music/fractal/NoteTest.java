@@ -2,35 +2,38 @@ package com.krasama.music.fractal;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import junit.framework.TestCase;
 
 public class NoteTest extends TestCase
 {
     public void testMajorScale()
     {
-        assertEquals(48, new Note(-7, null).getNumber());
-        assertEquals(50, new Note(-6, null).getNumber());
-        assertEquals(52, new Note(-5, null).getNumber());
-        assertEquals(53, new Note(-4, null).getNumber());
-        assertEquals(55, new Note(-3, null).getNumber());
-        assertEquals(57, new Note(-2, null).getNumber());
-        assertEquals(59, new Note(-1, null).getNumber());
-        assertEquals(60, new Note(0, null).getNumber());
-        assertEquals(62, new Note(1, null).getNumber());
-        assertEquals(64, new Note(2, null).getNumber());
-        assertEquals(65, new Note(3, null).getNumber());
-        assertEquals(67, new Note(4, null).getNumber());
-        assertEquals(69, new Note(5, null).getNumber());
-        assertEquals(71, new Note(6, null).getNumber());
-        assertEquals(72, new Note(7, null).getNumber());
+        Scale scale = Scale.C_MAJOR;
+        assertEquals(48, new Note(-7, null).getNoteNumber(scale));
+        assertEquals(50, new Note(-6, null).getNoteNumber(scale));
+        assertEquals(52, new Note(-5, null).getNoteNumber(scale));
+        assertEquals(53, new Note(-4, null).getNoteNumber(scale));
+        assertEquals(55, new Note(-3, null).getNoteNumber(scale));
+        assertEquals(57, new Note(-2, null).getNoteNumber(scale));
+        assertEquals(59, new Note(-1, null).getNoteNumber(scale));
+        assertEquals(60, new Note(0, null).getNoteNumber(scale));
+        assertEquals(62, new Note(1, null).getNoteNumber(scale));
+        assertEquals(64, new Note(2, null).getNoteNumber(scale));
+        assertEquals(65, new Note(3, null).getNoteNumber(scale));
+        assertEquals(67, new Note(4, null).getNoteNumber(scale));
+        assertEquals(69, new Note(5, null).getNoteNumber(scale));
+        assertEquals(71, new Note(6, null).getNoteNumber(scale));
+        assertEquals(72, new Note(7, null).getNoteNumber(scale));
     }
 
     public void testMarchTime()
     {
-        assertEquals(2000L, new Note(0, Fraction.valueOf("1")).getTime());
-        assertEquals(4000L, new Note(0, Fraction.valueOf("2")).getTime());
-        assertEquals(1000L, new Note(0, Fraction.valueOf("1/2")).getTime());
-        assertEquals(666L, new Note(0, Fraction.valueOf("1/3")).getTime());
+        Fraction ticksPerMeasure = Fraction.valueOf(2000);
+        assertEquals(2000L, new Note(0, Fraction.valueOf("1")).getTicks(ticksPerMeasure));
+        assertEquals(4000L, new Note(0, Fraction.valueOf("2")).getTicks(ticksPerMeasure));
+        assertEquals(1000L, new Note(0, Fraction.valueOf("1/2")).getTicks(ticksPerMeasure));
+        assertEquals(667L, new Note(0, Fraction.valueOf("1/3")).getTicks(ticksPerMeasure));
     }
 
     public void testIterate()
