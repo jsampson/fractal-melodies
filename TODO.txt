@@ -1,7 +1,7 @@
 / exit after playing
 / reversing pattern
-- generate MIDI sequence and play that, rather than calling noteOn/noteOff directly
-- play pattern once right before song
+/ generate MIDI sequence and play that, rather than calling noteOn/noteOff directly
+/ play pattern once right before song
 - pull all magic numbers into song variables (scale, tempo, etc.)
     - pattern (lengths, pitch offsets, reversals)
     - start
@@ -9,8 +9,14 @@
     - scale
     - tempo
 - text format for songs
+    - validation of everything
 - harmonies
+    - do we need multiple MIDI channels? trick is that note on/off events name the
+      "key" that was pressed, so we either need multiple channels or some code to
+      merge them together such that if bass and treble both want to press the same
+      key they don't conflict
 - progress bar while playing
+- make MIDI tick resolution exact
 - Swing UI
 - output/save as .mid
 - figure out why songs end "abruptly" (subjectively/musically speaking)
