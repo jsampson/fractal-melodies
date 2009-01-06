@@ -142,3 +142,20 @@ song L // **
     notes: -2 1/5, 0 1/5, 0 1/5, -2 1/5, -3 1/5
     start: 0 10
     bottom: 2/25
+
+song Harmony Attempt 1 // **
+    scale: C Major
+    beats: 4
+    notes: 0 1/4, -3 1/8, 2 1/8, 0 1/2
+    start: 0 32
+    bottom: 1/16
+    harmony: -7 1/8
+
+song Harmony Attempt 2 // ***
+    scale: C Major
+    beats: 4
+    notes: 0 1/4, -3 1/8, 2 1/8, 0 -1/2
+    start: 0 128
+    bottom: 1/16
+    harmony: -7 1/4
+    

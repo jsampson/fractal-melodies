@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -classpath target/classes com.krasama.music.fractal.Main "$@"

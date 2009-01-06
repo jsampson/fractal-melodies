@@ -1,6 +1,7 @@
 package com.krasama.music.fractal;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -14,11 +15,33 @@ public class Main
 {
     public static void main(String[] args) throws Exception
     {
-        InputStream file = Main.class.getResourceAsStream("/example-songs.txt");
-        Map<String, Song> songs = Parser.parseSongs(file);
-        Song song = songs.get("d+");
-        Sequence sequence = song.sequence();
-        playSequence(sequence);
+        if (args.length == 3 && args[1].equals("play") || args.length == 4 && args[1].equals("save"))
+        {
+            InputStream file = new FileInputStream(args[0]);
+            Map<String, Song> songs;
+            try
+            {
+                songs = Parser.parseSongs(file);
+            }
+            finally
+            {
+                file.close();
+            }
+            Song song = songs.get(args[2].toLowerCase());
+            Sequence sequence = song.sequence();
+            if (args[1].equals("play"))
+            {
+                playSequence(sequence);
+            }
+            else
+            {
+                saveSequence(sequence, new File(args[3]));
+            }
+        }
+        else
+        {
+            System.err.println("Usage: Main <song-file> (play <song-name> | save <song-name> <.mid-file>)");
+        }
     }
 
     public static void playSequence(Sequence sequence) throws Exception
