@@ -18,26 +18,16 @@ public class Song
     final Note start;
     final Fraction bottom;
     final Fraction beats;
-    final Note harmonyStart;
-    final Fraction harmonyBottom;
+    final List<Note> harmonies;
 
-    public Song(Scale scale, Note[] pattern, Note start, Fraction bottom, Fraction beats, Note harmony)
+    public Song(Scale scale, Note[] pattern, Note start, Fraction bottom, Fraction beats, List<Note> harmonies)
     {
         this.scale = scale;
         this.pattern = pattern;
         this.start = start;
         this.bottom = bottom;
         this.beats = beats;
-        if (harmony != null)
-        {
-            this.harmonyStart = new Note(harmony.pitch, start.length);
-            this.harmonyBottom = harmony.length;
-        }
-        else
-        {
-            this.harmonyStart = null;
-            this.harmonyBottom = null;
-        }
+        this.harmonies = harmonies;
     }
 
     public Sequence sequence() throws Exception
@@ -46,23 +36,27 @@ public class Song
         Track track = sequence.createTrack();
         Fraction twoBeats = Fraction.TWO.mul(Fraction.valueOf(TICKS_PER_BEAT));
 
-        Fraction patternTime = addNotesToTrack(track, Arrays.<Note> asList(pattern), Fraction.ZERO, null);
+        int channel = 0;
+        Fraction patternTime = addNotesToTrack(track, channel, Arrays.<Note> asList(pattern), Fraction.ZERO, null);
 
         List<Note> result = new ArrayList<Note>();
         start.iterate(result, pattern, bottom);
-        addNotesToTrack(track, result, patternTime.add(twoBeats), twoBeats);
+        addNotesToTrack(track, channel, result, patternTime.add(twoBeats), twoBeats);
 
-        if (harmonyStart != null)
+        for (Note harmony : harmonies)
         {
-            List<Note> harmony = new ArrayList<Note>();
-            harmonyStart.iterate(harmony, pattern, harmonyBottom);
-            addNotesToTrack(track, harmony, patternTime.add(twoBeats), twoBeats);
+            channel++;
+            Note harmonyStart = new Note(harmony.pitch, start.length);
+            Fraction harmonyBottom = harmony.length;
+            List<Note> harmonyNotes = new ArrayList<Note>();
+            harmonyStart.iterate(harmonyNotes, pattern, harmonyBottom);
+            addNotesToTrack(track, channel, harmonyNotes, patternTime.add(twoBeats), twoBeats);
         }
 
         return sequence;
     }
 
-    private Fraction addNotesToTrack(Track track, List<Note> notes, Fraction startTime, Fraction extendLastNote) throws Exception
+    private Fraction addNotesToTrack(Track track, int channel, List<Note> notes, Fraction startTime, Fraction extendLastNote) throws Exception
     {
         Fraction ticksPerMeasure = beats.mul(Fraction.valueOf(TICKS_PER_BEAT));
         Fraction time = startTime;
@@ -75,24 +69,24 @@ public class Song
             {
                 noteTime = noteTime.add(extendLastNote);
             }
-            track.add(noteOn(noteNumber, time.round()));
+            track.add(noteOn(channel, noteNumber, time.round()));
             time = time.add(noteTime);
-            track.add(noteOff(noteNumber, time.round()));
+            track.add(noteOff(channel, noteNumber, time.round()));
         }
         return time;
     }
 
-    private static MidiEvent noteOn(int noteNumber, long timestamp) throws Exception
+    private static MidiEvent noteOn(int channel, int noteNumber, long timestamp) throws Exception
     {
         ShortMessage message = new ShortMessage();
-        message.setMessage(ShortMessage.NOTE_ON, 0, noteNumber, 100);
+        message.setMessage(ShortMessage.NOTE_ON, channel, noteNumber, 100);
         return new MidiEvent(message, timestamp);
     }
 
-    private static MidiEvent noteOff(int noteNumber, long timestamp) throws Exception
+    private static MidiEvent noteOff(int channel, int noteNumber, long timestamp) throws Exception
     {
         ShortMessage message = new ShortMessage();
-        message.setMessage(ShortMessage.NOTE_OFF, 0, noteNumber, 0);
+        message.setMessage(ShortMessage.NOTE_OFF, channel, noteNumber, 0);
         return new MidiEvent(message, timestamp);
     }
 }

@@ -83,7 +83,7 @@ public class Note
 
     public static Note valueOf(String string)
     {
-        Pattern pattern = Pattern.compile("([-+]?[0-9]+) (-?)([0-9]+(/[0-9]+)?)");
+        Pattern pattern = Pattern.compile("\\+?(-?[0-9]+) (-?)([0-9]+(/[0-9]+)?)");
         Matcher matcher = pattern.matcher(string);
         if (matcher.matches())
         {
