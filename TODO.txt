@@ -14,12 +14,20 @@
     / play named song
     / save named song as .mid
 / support multiple harmonies
+x make MIDI tick resolution exact
 / allow +N for pitch offsets
-- validate everything
-- figure out why songs end "abruptly" (subjectively/musically speaking)
 / do we need multiple MIDI channels? trick is that note on/off events name the
   "key" that was pressed, so we either need multiple channels or some code to
   merge them together such that if bass and treble both want to press the same
   key they don't conflict
+- validate everything
 - progress bar while playing
-x make MIDI tick resolution exact
+- documentation
+    - file format reference
+    - article about background, algorithm, and examples
+- allow multiple patterns, chosen randomly (weighted?) on each recursion
+    - can it be non-random? does it matter?
+    - maybe allow specifying seed, so that good runs can be reproduced
+    - what about harmonies? seems they should use the same pattern at the
+      same point in the song -- only difference is how deep they go
+- figure out why songs end "abruptly" (subjectively/musically speaking)
