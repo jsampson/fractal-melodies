@@ -20,6 +20,7 @@ x make MIDI tick resolution exact
   "key" that was pressed, so we either need multiple channels or some code to
   merge them together such that if bass and treble both want to press the same
   key they don't conflict
+- warn if output file is not piano-safe (any notes outside 21-108)
 - validate everything
 - progress bar while playing
 - documentation
