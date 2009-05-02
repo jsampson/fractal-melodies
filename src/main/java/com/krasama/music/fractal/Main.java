@@ -9,7 +9,6 @@ import javax.sound.midi.MetaEventListener;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.MidiDevice.Info;
@@ -35,7 +34,8 @@ public class Main
                 }
             }
         }
-        else if (args.length == 3 && (args[1].equals("play") || args[1].equals("midi")) || args.length == 4 && args[1].equals("save"))
+        else if (args.length == 3 && (args[1].equals("play") || args[1].equals("midi")) || args.length == 4 &&
+                args[1].equals("save"))
         {
             InputStream file = new FileInputStream(args[0]);
             Map<String, Song> songs;

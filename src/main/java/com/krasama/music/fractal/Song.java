@@ -56,7 +56,8 @@ public class Song
         return sequence;
     }
 
-    private Fraction addNotesToTrack(Track track, int channel, List<Note> notes, Fraction startTime, Fraction extendLastNote) throws Exception
+    private Fraction addNotesToTrack(Track track, int channel, List<Note> notes, Fraction startTime, Fraction extendLastNote)
+            throws Exception
     {
         Fraction ticksPerMeasure = beats.mul(Fraction.valueOf(TICKS_PER_BEAT));
         Fraction time = startTime;
@@ -64,6 +65,10 @@ public class Song
         {
             Note note = notes.get(i);
             int noteNumber = note.getNoteNumber(scale);
+            if (noteNumber < 21 || noteNumber > 108)
+            {
+                throw new SongException("Notes in this song exceed the physical range of a standard piano.");
+            }
             Fraction noteTime = note.length.mul(ticksPerMeasure);
             if (extendLastNote != null && i == notes.size() - 1)
             {
