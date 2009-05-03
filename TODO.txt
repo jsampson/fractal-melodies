@@ -22,7 +22,7 @@ x make MIDI tick resolution exact
   key they don't conflict
 / support outputting to an actual MIDI device
 / error if song is not piano-safe (any notes outside 21-108)
-- progress bar while playing
+/ progress bar while playing
 - validate everything
 - documentation
     - file format reference

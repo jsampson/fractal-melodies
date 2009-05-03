@@ -76,7 +76,7 @@ public class SongTest extends TestCase
     private void assertEndOfTrack(int timestamp, MidiEvent event)
     {
         MetaMessage message = (MetaMessage) event.getMessage();
-        assertEquals("javax.sound.midi.Track$ImmutableEndOfTrack", message.getClass().getName());
+        assertEquals(47, message.getType());
         assertEquals(timestamp, event.getTick());
     }
 }

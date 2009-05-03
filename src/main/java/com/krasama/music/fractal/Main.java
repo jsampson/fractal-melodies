@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;
 
-import javax.sound.midi.MetaEventListener;
-import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
@@ -74,21 +72,46 @@ public class Main
 
     public static void playSequence(Sequence sequence, boolean useSoftwareSynth) throws Exception
     {
-        final Sequencer sequencer = getSequencer(useSoftwareSynth);
+        Sequencer sequencer = getSequencer(useSoftwareSynth);
         sequencer.setSequence(sequence);
         sequencer.open();
         sequencer.start();
-        sequencer.addMetaEventListener(new MetaEventListener()
-            {
-                public void meta(MetaMessage meta)
-                {
-                    if (meta.getType() == 47)
-                    {
-                        sequencer.close();
-                        System.exit(0);
-                    }
-                }
-            });
+        displayProgress(sequencer);
+        sequencer.close();
+        System.exit(0);
+    }
+
+    private static void displayProgress(Sequencer sequencer) throws Exception
+    {
+        long length = sequencer.getMicrosecondLength();
+        printProgressBar('_', length, length);
+        System.out.println();
+        while (sequencer.isRunning())
+        {
+            long position = sequencer.getMicrosecondPosition();
+            printProgressBar('#', length, position);
+            Thread.sleep(200);
+        }
+        printProgressBar('#', length, length);
+        System.out.println();
+    }
+
+    private static void printProgressBar(char c, long length, long position)
+    {
+        System.out.print('\r');
+        long count = 72 * position / length + 1;
+        for (long i = 0; i < count; i++)
+        {
+            System.out.print(c);
+        }
+        System.out.print(" " + displayTime(position));
+    }
+
+    private static String displayTime(long microseconds)
+    {
+        long minutes = (microseconds / 1000000) / 60;
+        long seconds = (microseconds / 1000000) % 60;
+        return String.format("%d:%02d", minutes, seconds);
     }
 
     private static Sequencer getSequencer(boolean useSoftwareSynth) throws Exception
