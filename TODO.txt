@@ -23,13 +23,52 @@ x make MIDI tick resolution exact
 / support outputting to an actual MIDI device
 / error if song is not piano-safe (any notes outside 21-108)
 / progress bar while playing
-- validate everything
+- validate everything nicely
+    - show friendly error message with line number
+    - general line syntax
+    - value line before first name line
+    - unrecognized type
+    - unrecognized value
+    - missing or too many of any singular value
+    - for scale:
+        - middle must be an integer from 0 to 127
+        - steps must be a non-empty, strictly-increasing list of integers > 0
+    - for song:
+        - scale must be already defined
+        - notes must be a non-empty list with valid note syntax
+        - note lengths must add up to 1 (ignoring "-" for reversal)
+        - start must have valid note syntax
+        - bottom must have valid fraction syntax and be positive
+        - beats must have valid fraction syntax and be positive
+        - each harmony must have valid note syntax and positive length
+    - note syntax:
+        - require non-zero length
+        - allow + or - but not both
+    - in main:
+        - file not found etc. for songs (input) and .mid (output) files
+        - no such song in file
+        - notes in sequence outside of piano range 
 - documentation
     - file format reference
     - article about background, algorithm, and examples
+- GUI
+    - file chooser for songs file
+    - plain text editor for songs file
+        - when file is saved, re-parse it and select line if any errors
+    - help, including file format and theory
+    - drop-down to choose song
+        - maintain original capitalization of song names
+        - show note range of resulting sequence
+        - show warning if outside of piano range (21-108)
+        - show error if outside of MIDI range (0-127)
+    - buttons for play and save
+    - drop-down to select MIDI device or software synth for playing
+    - file chooser for saving .mid file
+    - add a rating attribute to each song to remember how good they are
 - allow multiple patterns, chosen randomly (weighted?) on each recursion
     - can it be non-random? does it matter?
     - maybe allow specifying seed, so that good runs can be reproduced
     - what about harmonies? seems they should use the same pattern at the
       same point in the song -- only difference is how deep they go
 - figure out why songs end "abruptly" (subjectively/musically speaking)
+- come up with a way to incorporate silence (rests)
